@@ -314,20 +314,24 @@ EOF
     if [[ x"${certmode}" == x"file" ]]; then
         cert_mount="-v ${certfile}:/etc/XrayR/${xrayrname}.cert -v ${keyfile}:/etc/XrayR/${xrayrname}.key"
     fi
-    #docker pull ghcr.io/xrayr-project/xrayr:latest
-    docker pull ghcr.io/vpssme/xrayr-backup:latest
-    docker run --restart=always --log-opt max-size=5m --log-opt max-file=3 \
-        --name xrayr_${xrayrname} -d \
-        -v "$config_file":/etc/XrayR/config.yml \
-        -v /opt/xrayr/dns_${xrayrname}.json:/etc/XrayR/dns.json \
-        ${cert_mount} \
-        --network=host ghcr.io/vpssme/xrayr-backup:latest
-    if [[ $(docker ps -q -f name=xrayr_${xrayrname}) ]]; then
-        tmpfile=$(mktemp)
-        crontab -l > "${tmpfile}"
-        if grep -wq "xrayr_${xrayrname}" "${tmpfile}"; then
-            sed -i "/xrayr_${xrayrname}/d" "${tmpfile}"
-        fi
+
+#docker pull ghcr.io/xrayr-project/xrayr:latest
+
+docker pull ghcr.io/vpssme/xrayr-backup:latest
+
+docker run --restart=always --log-opt max-size=5m --log-opt max-file=3 \
+    --name xrayr_${xrayrname} -d \
+    -v "$config_file":/etc/XrayR/config.yml \
+    -v /opt/xrayr/dns_${xrayrname}.json:/etc/XrayR/dns.json \
+    ${cert_mount} \
+    --network=host ghcr.io/vpssme/xrayr-backup:latest
+
+if [[ $(docker ps -q -f name=xrayr_${xrayrname}) ]]; then
+    tmpfile=$(mktemp)
+    crontab -l > "${tmpfile}"
+    if grep -wq "xrayr_${xrayrname}" "${tmpfile}"; then
+        sed -i "/xrayr_${xrayrname}/d" "${tmpfile}"
+    fi
         echo "0 6 * * *  docker restart xrayr_${xrayrname}" >> "${tmpfile}"
         crontab "${tmpfile}"
         rm -f "${tmpfile}"
