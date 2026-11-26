@@ -168,8 +168,8 @@ install_XrayR() {
     fi
     [ -e /opt/xrayr ] || mkdir -p /opt/xrayr/
     local config_file="/opt/xrayr/config_${xrayrname}.yml"
-    #wget -N --no-check-certificate -O "$config_file" https://raw.githubusercontent.com/terminodev/titanicsite7/main/xrayr/config.yml.example
-    #wget -N --no-check-certificate -O /opt/xrayr/dns_${xrayrname}.json https://raw.githubusercontent.com/terminodev/titanicsite7/main/xrayr/dns.json
+    #wget -N --no-check-certificate -O "$config_file" https://raw.githubusercontent.com/vpssme/niuniu/main/xrayr/config.yml.example
+    #wget -N --no-check-certificate -O /opt/xrayr/dns_${xrayrname}.json https://raw.githubusercontent.com/vpssme/niuniu/main/xrayr/dns.json
     #if [[ $? -ne 0 ]]; then
     #    echo -e "${red}下载失败，请确保网络可以连接到github.com${plain}"
     #    exit 1
