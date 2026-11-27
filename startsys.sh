@@ -937,7 +937,7 @@ set_driver() {
 set_motd() {
     msg_info "配置登录欢迎信息..."
     if [[ ! -e /etc/profile.d/motd.sh ]]; then
-        wget --timeout=30 --tries=3 -O /etc/profile.d/motd.sh "https://${GITHUB_RAW_URL}/terminodev/titanicsite7/main/motd.sh"
+        wget --timeout=30 --tries=3 -O /etc/profile.d/motd.sh "https://${GITHUB_RAW_URL}/vpssme/niuniu/main/motd.sh"
         chmod a+x /etc/profile.d/motd.sh
     fi
     msg_ok "登录欢迎信息配置完成"
