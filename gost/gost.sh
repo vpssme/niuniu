@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Wiki: https://v2.gost.run/
-# Usage: bash <(curl -s https://raw.githubusercontent.com/terminodev/titanicsite7/main/gost/gost.sh)
+# Usage: bash <(curl -s https://raw.githubusercontent.com/vpssme/niuniu/main/gost/gost.sh)
 # Uninstall: systemctl disable gost --now ; rm -rf /etc/systemd/system/gost.service /opt/gost
 
 GITHUB_RAW_URL="raw.githubusercontent.com"
@@ -59,7 +59,7 @@ else
     fi
 fi
 [ -e /opt/gost/ ] || mkdir -p /opt/gost/
-[ -e /opt/gost/config.json ] || wget https://${GITHUB_RAW_URL}/terminodev/titanicsite7/main/gost/config.json -O /opt/gost/config.json
+[ -e /opt/gost/config.json ] || wget https://${GITHUB_RAW_URL}/vpssme/niuniu/main/gost/config.json -O /opt/gost/config.json
 [ -e /opt/gost/gost ] && rm -rf /opt/gost/gost
 if [ ${targetversion} \> 2.11.5 ]; then
   wget -O /tmp/gost_${targetversion}_linux_amd64.tar.gz $URL && tar -xvf /tmp/gost_${targetversion}_linux_amd64.tar.gz -C /opt/gost/
